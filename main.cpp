@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <string>
 #include <vector>
+#include <iostream>
 
 // Window Size
 
@@ -29,12 +30,15 @@ public:
 
   unsigned int comparisons = 0;
   unsigned int swaps = 0;
+  int percentage = 0;
 
   // Rearrange The arr For The Next Value
 
   bool next(){
 
     int arrSize = sizeof(arr)/sizeof(arr[0]);
+    int highest = 0;
+    int current = 0;
 
     for (int i = 0; i < arrSize; i++){
       if (i >= arrSize-1) return true;
@@ -50,10 +54,16 @@ public:
 
         swaps++;
 
+        current = ((float)(i+1)/79)*100;
+
+        if (current > highest) highest = current;
+
         break;
       }
 
     }
+
+    if (highest > percentage) percentage = highest;
 
     return false;
 
@@ -69,7 +79,7 @@ int main(){
 
   // Init Window
 
-  InitWindow(screenWidth, screenHeight, "Window");
+  InitWindow(screenWidth, screenHeight, "Bubble Sort");
   SetTargetFPS(60);
 
   // Add Random Bars To Sorter
@@ -95,7 +105,7 @@ int main(){
 
     // Draw Comparisons
 
-    std::string cpp_swaps_string = std::to_string(sorter.swaps) + " Swaps - " + std::to_string(sorter.comparisons) + " Comparisons";
+    std::string cpp_swaps_string = std::to_string(sorter.percentage) + "% - " + std::to_string(sorter.swaps) + " Swaps - " + std::to_string(sorter.comparisons) + " Comparisons";
     char *cstr = &cpp_swaps_string[0];
 
     DrawText(cstr, 0, 0, 20, RAYWHITE);
