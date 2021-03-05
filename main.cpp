@@ -1,6 +1,8 @@
 #include "raylib.h"
 #include <time.h>
 #include <cstdlib>
+#include <string>
+#include <vector>
 
 // Window Size
 
@@ -23,8 +25,10 @@ struct Bar{
 class Bubble{
 public:
   Bar arr[80];
-
   Bar store[2];
+
+  unsigned int comparisons = 0;
+  unsigned int swaps = 0;
 
   // Rearrange The arr For The Next Value
 
@@ -35,12 +39,16 @@ public:
     for (int i = 0; i < arrSize; i++){
       if (i >= arrSize-1) return true;
 
+      comparisons++;
+
       if (arr[i].size.y > arr[i+1].size.y){
         store[0] = arr[i];
         store[1] = arr[i+1];
 
         arr[i] = store[1];
         arr[i+1] = store[0];
+
+        swaps++;
 
         break;
       }
@@ -84,6 +92,13 @@ int main(){
     // Clear Background
 
     ClearBackground(BACKGROUND_COLOUR);
+
+    // Draw Comparisons
+
+    std::string cpp_swaps_string = std::to_string(sorter.swaps) + " Swaps - " + std::to_string(sorter.comparisons) + " Comparisons";
+    char *cstr = &cpp_swaps_string[0];
+
+    DrawText(cstr, 0, 0, 20, RAYWHITE);
 
     // Draw New Bars
 
