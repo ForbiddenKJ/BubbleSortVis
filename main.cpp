@@ -1,9 +1,5 @@
 #include "raylib.h"
-#include <time.h>
-#include <cstdlib>
 #include <string>
-#include <vector>
-#include <iostream>
 
 // Window Size
 
@@ -73,10 +69,6 @@ public:
 
 int main(){
 
-  // Randomise Numbers
-
-  srand( time(NULL) );
-
   // Init Window
 
   InitWindow(screenWidth, screenHeight, "Bubble Sort");
@@ -88,7 +80,7 @@ int main(){
   bool sorted = false;
 
   for (int i = 0; i < 80; i++){
-    Vector2 size = {(float)5, (float)(rand() % (1 + 450))};
+    Vector2 size = {(float)5, (float)GetRandomValue(1,450)};
     Vector2 pos = {0, (float)450-size.y};
 
     sorter.arr[i] = {size, pos};
