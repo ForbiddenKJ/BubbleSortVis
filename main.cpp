@@ -1,6 +1,8 @@
 #include "raylib.h"
 #include <string>
 
+#define C_STRING(x) &x[0]
+
 // Window Size
 
 const int screenWidth = 800;
@@ -98,7 +100,8 @@ int main(){
     // Draw Comparisons
 
     std::string cpp_swaps_string = std::to_string(sorter.percentage) + "% - " + std::to_string(sorter.swaps) + " Swaps - " + std::to_string(sorter.comparisons) + " Comparisons";
-    char *cstr = &cpp_swaps_string[0];
+    //char *cstr = &cpp_swaps_string[0];
+    char *cstr = C_STRING(cpp_swaps_string);
 
     DrawText(cstr, 0, 0, 20, RAYWHITE);
 
